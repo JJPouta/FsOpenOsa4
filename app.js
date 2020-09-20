@@ -7,7 +7,7 @@ const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 const mongoose = require('mongoose')
 
-const connString = process.env.MONGO_URL
+const connString = config.MONGO_URL
 
 mongoose.connect(connString, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => logger.infoMsg('Connected to Blogi database'))
@@ -18,9 +18,8 @@ app.use(express.static('build'))
 app.use(express.json())
 app.use(middleware.requestLogger)
 
-app.use('/api/notes', router)
+app.use('/api/blogs', router)
 
-// app.use(middleware.unknownEndpoint)
-// app.use(middleware.errorHandler)
+app.use(middleware.errorHandler)
 
 module.exports = app
