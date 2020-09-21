@@ -14,6 +14,11 @@ const totalLikes = (blogs) => {
   return likeCount
 }
 
-// console.log(totalLikes([{ likes: 5 }, { likes: 10 }]))
+const favoriteBlog = (blogs) => {
+  const maxBlog = blogs.reduce(function (prev, current) {
+    return (prev.likes > current.likes) ? prev : current
+  })
+  return { title: maxBlog.title, author: maxBlog.author, likes: maxBlog.likes }
+}
 
-module.exports = { dummy, totalLikes }
+module.exports = { dummy, totalLikes, favoriteBlog }
