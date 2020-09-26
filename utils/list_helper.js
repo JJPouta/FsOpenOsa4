@@ -21,4 +21,42 @@ const favoriteBlog = (blogs) => {
   return { title: maxBlog.title, author: maxBlog.author, likes: maxBlog.likes }
 }
 
-module.exports = { dummy, totalLikes, favoriteBlog }
+// Palauttaa authorin, jolla lkm eniten blogeja
+const mostBlogs = (blogs) => {
+  const authorObject = {}
+  let authorWithMostBlogs = { author: null, blogs: 0 }
+
+  for (const blog of blogs) {
+    if (authorObject[blog.author] == null) {
+      authorObject[blog.author] = 1
+    } else {
+      authorObject[blog.author]++
+    }
+
+    if (authorObject[blog.author] > authorWithMostBlogs.blogs) {
+      authorWithMostBlogs = { author: blog.author, blogs: authorObject[blog.author] }
+    }
+  }
+  return authorWithMostBlogs
+}
+
+const mostLikes = (blogs) => {
+  const authorObject = {}
+  let authorWithMostLikes = { author: null, likes: 0 }
+
+  for (const blog of blogs) {
+    if (authorObject[blog.author] == null) {
+      authorObject[blog.author] = blog.likes
+    } else {
+      authorObject[blog.author] = authorObject[blog.author] + blog.likes
+    }
+
+    if (authorObject[blog.author] > authorWithMostLikes.likes) {
+      authorWithMostLikes = { author: blog.author, likes: authorObject[blog.author] }
+    }
+  }
+  return authorWithMostLikes
+}
+
+mostLikes(multiBlogs)
+module.exports = { dummy, totalLikes, favoriteBlog, mostBlogs, mostLikes }
