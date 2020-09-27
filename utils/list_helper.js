@@ -42,7 +42,7 @@ const mostBlogs = (blogs) => {
 
 const mostLikes = (blogs) => {
   const authorObject = {}
-  let authorWithMostLikes = { author: null, likes: 0 }
+  let authorWithMostLikes = { author: null, likes: null }
 
   for (const blog of blogs) {
     if (authorObject[blog.author] == null) {
@@ -51,12 +51,11 @@ const mostLikes = (blogs) => {
       authorObject[blog.author] = authorObject[blog.author] + blog.likes
     }
 
-    if (authorObject[blog.author] > authorWithMostLikes.likes) {
+    if (authorObject[blog.author] > authorWithMostLikes.likes || authorWithMostLikes.likes == null) {
       authorWithMostLikes = { author: blog.author, likes: authorObject[blog.author] }
     }
   }
   return authorWithMostLikes
 }
 
-mostLikes(multiBlogs)
 module.exports = { dummy, totalLikes, favoriteBlog, mostBlogs, mostLikes }
