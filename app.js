@@ -7,7 +7,14 @@ const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 const mongoose = require('mongoose')
 
-const connString = config.MONGO_URL
+let connString = null
+
+// Testi vai prod moodi
+if (process.env.NODE_ENV === 'test') {
+  connString = config.TESTDB_URL
+} else {
+  connString = config.MONGO_URL
+}
 
 mongoose.connect(connString, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => logger.infoMsg('Connected to Blogi database'))
