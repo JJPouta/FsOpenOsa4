@@ -1,5 +1,5 @@
 const infoMsg = (...params) => {
-  console.log(...params)
+  if (process.env.NODE_ENV !== 'test') { console.log(...params) }
 }
 
 const errorMsg = (...params) => {
