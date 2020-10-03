@@ -9,7 +9,7 @@ const requestLogger = (req, res, next) => {
 
 const errorHandler = (error, req, res, next) => {
   if (error.name === 'ValidationError') {
-    res.status(406).send(error.message)
+    res.status(400).send(error.message)
   }
   logger.errorMsg(error.message)
   next(error)
