@@ -7,7 +7,7 @@ const usersRouter = require('./controllers/usersRouter')
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 const mongoose = require('mongoose')
-
+mongoose.set('useCreateIndex', true)
 let connString = null
 
 // Testi vai prod moodi

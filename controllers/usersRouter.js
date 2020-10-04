@@ -3,7 +3,7 @@ const usersRouter = require('express').Router()
 const User = require('../models/user')
 require('express-async-errors')
 
-usersRouter.post('/', async (req, res, next) => {
+usersRouter.post('/', async (req, res) => {
   const body = req.body
   // testataan salasanan pituus
 
@@ -27,6 +27,11 @@ usersRouter.post('/', async (req, res, next) => {
   res.json(savedUser)
 })
 
-module.exports = usersRouter
+usersRouter.get('/', async (req, res) => {
+  const users = await User
+    .find({}).populate('blogs')
 
-// TEE TESTIT 4.16
+  res.json(users.map(u => u.toJSON()))
+})
+
+module.exports = usersRouter
