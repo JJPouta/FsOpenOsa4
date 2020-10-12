@@ -38,6 +38,19 @@ router.post('/', async (req, res) => {
   res.status(201).json(newBlogPost)
 })
 
+router.put('/:id', async (req, res, next) => {
+  const updatedBlog = {
+    title: req.body.title,
+    author: req.body.author,
+    likes: req.body.likes,
+    user: req.body.user
+  }
+
+  await Blog.findByIdAndUpdate(req.params.id, updatedBlog, { new: true })
+
+  res.json(updatedBlog)
+})
+
 // 4.13
 router.delete('/:id', async (req, res) => {
   await Blog.findByIdAndRemove(req.params.id)
